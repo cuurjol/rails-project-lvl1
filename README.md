@@ -1,8 +1,6 @@
 # HexletCode
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hexlet_code`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A library with which it is convenient to create forms in site templates. Allows to reduce the form description code many times due to automatic error handling and various controls.
 
 [![Actions Status](https://github.com/cuurjol/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/cuurjol/rails-project-lvl1/actions)
 
@@ -24,7 +22,22 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+User = Struct.new(:name, :job, :gender, keyword_init: true)
+user = User.new name: 'rob', job: 'hexlet', gender: 'm'
+
+HexletCode.form_for user do |f|
+  f.input :name
+  f.input :gender
+  f.input :job, as: :text
+end
+
+# <form action="#" method="post">
+#   <input name="name" type="text" value="rob">
+#   <input name="gender" type="text" value="m">
+#   <textarea name="job" cols="20" rows="40">hexlet</textarea>
+# </form>
+```
 
 ## Development
 
