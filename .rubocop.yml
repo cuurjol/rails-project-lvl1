@@ -7,3 +7,7 @@ Layout/LineLength:
 
 Style/Documentation:
   Enabled: false
+
+Naming/MethodParameterName:
+  AllowedNames:
+    - as
