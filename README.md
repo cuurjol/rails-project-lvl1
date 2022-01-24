@@ -3,6 +3,7 @@
 A library with which it is convenient to create forms in site templates. Allows to reduce the form description code many times due to automatic error handling and various controls.
 
 [![Actions Status](https://github.com/cuurjol/rails-project-lvl1/workflows/hexlet-check/badge.svg)](https://github.com/cuurjol/rails-project-lvl1/actions)
+[![CI](https://github.com/cuurjol/rails-project-lvl1/actions/workflows/main.yml/badge.svg)](https://github.com/cuurjol/rails-project-lvl1/actions/workflows/main.yml)
 
 ## Installation
 
