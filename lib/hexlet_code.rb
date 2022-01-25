@@ -8,6 +8,7 @@ module HexletCode
   class Error < StandardError; end
 
   def self.form_for(model, url: '#', &block)
-    Tag.build('form', action: url, method: 'post') { block.call(FormBuilder.new(model)).join }
+    form_elements = "\n#{block.call(FormBuilder.new(model)).map { |tag| "  #{tag}" }.join}"
+    Tag.build('form', action: url, method: 'post') { form_elements }
   end
 end

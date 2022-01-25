@@ -27,14 +27,14 @@ module HexletCode
     private
 
     def build_textarea_tag(value, attributes)
-      attributes.update(cols: 20) if attributes[:cols].nil?
       attributes.update(rows: 40) if attributes[:rows].nil?
+      attributes.update(cols: 20) if attributes[:cols].nil?
       Tag.build('textarea', **attributes) { value }
     end
 
     def build_input_tag(value, attributes)
-      attributes.update(value: value) unless value.nil?
       attributes.update(type: 'text')
+      attributes.update(value: value) unless value.nil?
       Tag.build('input', **attributes)
     end
 
