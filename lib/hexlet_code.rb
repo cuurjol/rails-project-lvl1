@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require_relative 'hexlet_code/version'
-require_relative 'hexlet_code/tag'
-require_relative 'hexlet_code/form_builder'
-
 module HexletCode
+  autoload(:FormBuilder, 'hexlet_code/form_builder.rb')
+  autoload(:Tag, 'hexlet_code/tag.rb')
+  autoload(:VERSION, 'hexlet_code/version.rb')
+
   class Error < StandardError; end
 
   def self.form_for(model, url: '#', &block)
