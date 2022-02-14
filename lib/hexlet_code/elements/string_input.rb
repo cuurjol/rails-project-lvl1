@@ -9,7 +9,7 @@ module HexletCode
         input = Tag.build('input', **attributes)
         label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
         label = Tag.build('label', for: attributes[:name]) { label_value }
-        [label, input]
+        [label, input].join
       end
 
       private

@@ -10,25 +10,10 @@ module HexletCode
     end
 
     def render
-      elements = form_builder.elements.map do |element|
-        if element.is_a?(HexletCode::Elements::Selection)
-          rebuild_selection_element(element)
-        else
-          element.to_html
-        end
-      end
-
-      value = "\n  #{elements.join('  ')}"
+      string_elements = form_builder.elements.map(&:to_html).join.split(/\n\s{0,2}(?=<)/)
+      string_result = string_elements.map { |str| str.match?(/option/) ? "  #{str}" : str }.join("\n  ")
+      value = "\n  #{string_result}"
       Tag.build('form', **attributes) { value }
-    end
-
-    private
-
-    def rebuild_selection_element(element)
-      label, selection = element.to_html
-      splited_selection = selection.split(/\n\s{0,2}(?=<)/)
-      result = splited_selection.map { |str| str.match?(/option/) ? "  #{str}" : str }.join("\n  ")
-      [label, result]
     end
   end
 end

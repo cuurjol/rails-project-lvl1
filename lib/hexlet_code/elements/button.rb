@@ -6,7 +6,7 @@ module HexletCode
       FILTER_ATTRIBUTES = (%i[type value] + BASE_ATTRIBUTES).freeze
 
       def to_html
-        [Tag.build('input', **attributes)]
+        Tag.build('input', **attributes)
       end
 
       private

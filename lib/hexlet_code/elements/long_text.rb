@@ -16,7 +16,7 @@ module HexletCode
         textarea = Tag.build('textarea', **attributes) { text_value }
         label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
         label = Tag.build('label', for: attributes[:name]) { label_value }
-        [label, textarea]
+        [label, textarea].join
       end
 
       private
