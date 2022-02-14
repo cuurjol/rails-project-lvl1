@@ -22,16 +22,22 @@ class HexletCodeTest < Minitest::Test
     assert_equal(expected_simple_form, result)
   end
 
-  def test_simple_form_with_textarea
-    user_struct = Struct.new(:name, :bio, keyword_init: true)
-    user = user_struct.new(name: 'Cuurjol', bio: 'Hello world! Very long test text!')
+  def test_complex_form
+    user_struct = Struct.new(:name, :age, :gender, :job, :usa_resident, :citizenship, keyword_init: true)
+    user = user_struct.new(name: 'Michael', age: 25, gender: 'm', job: 'Facebook', usa_resident: true,
+                           citizenship: %w[germany usa])
 
-    form = HexletCode.form_for(user) do |f|
+    expected_complex_form = load_fixture('complex_form.html')
+    result = HexletCode.form_for(user, url: '/users/1') do |f|
       f.input :name
-      f.input :bio, as: :text, rows: 50, cols: 30
+      f.input :age
+      f.input :gender
+      f.input :job, as: :text, rows: 50, cols: 50
+      f.input :usa_resident, as: :boolean
+      f.input :citizenship, as: :select, multiple: true, options: %w[russia germany england usa]
       f.submit
     end
 
-    assert(form.include?('<textarea rows="50" cols="30" name="bio">Hello world! Very long test text!</textarea>'))
+    assert_equal(expected_complex_form, result)
   end
 end

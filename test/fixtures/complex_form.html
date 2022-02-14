@@ -1,0 +1,20 @@
+<form action="/users/1" method="post">
+  <label for="name">Name</label>
+  <input type="text" value="Michael" name="name">
+  <label for="age">Age</label>
+  <input type="text" value="25" name="age">
+  <label for="gender">Gender</label>
+  <input type="text" value="m" name="gender">
+  <label for="job">Job</label>
+  <textarea rows="50" cols="50" name="job">Facebook</textarea>
+  <input type="checkbox" value="true" checked name="usa_resident">
+  <label for="usa_resident">Usa Resident</label>
+  <label for="citizenship">Citizenship</label>
+  <select name="citizenship" multiple>
+    <option value="russia">russia</option>
+    <option value="germany" selected>germany</option>
+    <option value="england">england</option>
+    <option value="usa" selected>usa</option>
+  </select>
+  <input type="submit" value="Save" name="submit">
+</form>
