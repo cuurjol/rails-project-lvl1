@@ -2,7 +2,6 @@
 
 module HexletCode
   autoload(:Elements, 'hexlet_code/elements.rb')
-  autoload(:Error, 'hexlet_code/error.rb')
   autoload(:FormBuilder, 'hexlet_code/form_builder.rb')
   autoload(:FormTemplate, 'hexlet_code/form_template.rb')
   autoload(:Tag, 'hexlet_code/tag.rb')
