@@ -2,7 +2,7 @@
 
 module HexletCode
   module Elements
-    class Selection < Base
+    class SelectInput < Base
       FILTER_ATTRIBUTES = (BASE_ATTRIBUTES + %i[size multiple]).freeze
 
       attr_reader :options, :selected_values
@@ -15,10 +15,7 @@ module HexletCode
 
       def to_html
         value = "\n  #{options.map { |option| build_option(option) }.join('  ')}"
-        selection = Tag.build('select', **attributes) { value }
-        label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
-        label = Tag.build('label', for: attributes[:name]) { label_value }
-        [label, selection].join
+        Tag.build('select', **attributes) { value }
       end
 
       private

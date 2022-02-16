@@ -5,8 +5,9 @@ module HexletCode
     autoload(:Base, 'hexlet_code/elements/base.rb')
     autoload(:BooleanInput, 'hexlet_code/elements/boolean_input.rb')
     autoload(:Button, 'hexlet_code/elements/button.rb')
-    autoload(:LongText, 'hexlet_code/elements/long_text.rb')
-    autoload(:Selection, 'hexlet_code/elements/selection.rb')
+    autoload(:PasswordInput, 'hexlet_code/elements/password_input.rb')
+    autoload(:SelectInput, 'hexlet_code/elements/select_input.rb')
     autoload(:StringInput, 'hexlet_code/elements/string_input.rb')
+    autoload(:TextInput, 'hexlet_code/elements/text_input.rb')
   end
 end

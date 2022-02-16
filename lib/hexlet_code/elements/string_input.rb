@@ -6,10 +6,7 @@ module HexletCode
       FILTER_ATTRIBUTES = (%i[type value size maxlength] + BASE_ATTRIBUTES).freeze
 
       def to_html
-        input = Tag.build('input', **attributes)
-        label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
-        label = Tag.build('label', for: attributes[:name]) { label_value }
-        [label, input].join
+        Tag.build('input', **attributes)
       end
 
       private

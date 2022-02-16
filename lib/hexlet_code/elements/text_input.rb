@@ -2,7 +2,7 @@
 
 module HexletCode
   module Elements
-    class LongText < Base
+    class TextInput < Base
       FILTER_ATTRIBUTES = (%i[rows cols] + BASE_ATTRIBUTES).freeze
 
       attr_reader :text_value
@@ -13,10 +13,7 @@ module HexletCode
       end
 
       def to_html
-        textarea = Tag.build('textarea', **attributes) { text_value }
-        label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
-        label = Tag.build('label', for: attributes[:name]) { label_value }
-        [label, textarea].join
+        Tag.build('textarea', **attributes) { text_value }
       end
 
       private
