@@ -27,6 +27,7 @@ Or install it yourself as:
 User = Struct.new(:name, :age, :gender, :job, :usa_resident, :citizenship, keyword_init: true)
 user = User.new(name: 'Michael', age: 25, gender: 'm', job: 'Facebook', usa_resident: true, citizenship: %w[germany usa])
 
+# There are several input types: string (by default), boolean, password, select, text
 HexletCode.form_for(user, url: '/users/1') do |f|
   f.input :name
   f.input :age
@@ -35,6 +36,7 @@ HexletCode.form_for(user, url: '/users/1') do |f|
   f.input :usa_resident, as: :boolean
   f.input :citizenship, as: :select, multiple: true, options: %w[russia germany england usa]
   f.submit
+  f.reset
 end
 
 # <form action="/users/1" method="post">
@@ -56,6 +58,7 @@ end
 #     <option value="usa" selected>usa</option>
 #   </select>
 #   <input type="submit" value="Save" name="submit">
+#   <input type="reset" value="Reset" name="reset">
 # </form>
 ```
 

@@ -36,6 +36,7 @@ class HexletCodeTest < Minitest::Test
       f.input :usa_resident, as: :boolean
       f.input :citizenship, as: :select, multiple: true, options: %w[russia germany england usa]
       f.submit
+      f.reset
     end
 
     assert_equal(expected_complex_form, result)
