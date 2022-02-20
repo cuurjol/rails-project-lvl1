@@ -8,12 +8,12 @@ module HexletCode
       attr_reader :text_value
 
       def initialize(attributes = {})
-        @text_value = attributes.delete(:value)
         super
+        @text_value = attributes[:value]
       end
 
-      def to_html
-        Tag.build('textarea', **attributes) { text_value }
+      def to_html(indent_level = 0)
+        Tag.build('textarea', indent_level: indent_level, **attributes) { text_value }
       end
 
       private

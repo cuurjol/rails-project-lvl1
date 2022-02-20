@@ -8,14 +8,14 @@ module HexletCode
       attr_reader :options, :selected_values
 
       def initialize(attributes = {})
-        @options = attributes.delete(:options) || []
-        @selected_values = attributes.delete(:value) || []
         super
+        @options = attributes[:options] || []
+        @selected_values = attributes[:value] || []
       end
 
-      def to_html
-        value = "\n  #{options.map { |option| build_option(option) }.join('  ')}"
-        Tag.build('select', **attributes) { value }
+      def to_html(indent_level = 0)
+        value = options.map { |option| build_option(option, indent_level + 1) }.join
+        Tag.build('select', indent_level: indent_level, **attributes) { value }
       end
 
       private
@@ -24,11 +24,11 @@ module HexletCode
         attributes.slice(*FILTER_ATTRIBUTES)
       end
 
-      def build_option(value)
+      def build_option(value, indent_level)
         attributes = {}
         attributes[:value] = value
         attributes[:selected] = true if selected_values.include?(value)
-        Tag.build('option', **attributes) { value }
+        Tag.build('option', indent_level: indent_level, **attributes) { value }
       end
     end
   end

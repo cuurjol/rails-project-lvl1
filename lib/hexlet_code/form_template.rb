@@ -3,27 +3,37 @@
 module HexletCode
   class FormTemplate
     class << self
-      def render(form_builder, form_attributes)
-        controls = form_builder.elements.map { |element| render_element(element) }
-        string_controls = controls.join.split(/\n\s{0,2}(?=<)/)
-        string_result = string_controls.map { |str| str.match?(/option/) ? "  #{str}" : str }.join("\n  ")
-        value = "\n  #{string_result}"
-        Tag.build('form', **form_attributes) { value }
+      def render(form_builder)
+        Tag.build('form', **form_builder.form_attributes) do
+          form_builder.elements.map do |element_attributes|
+            case element_attributes[:type]
+            when :submit, :reset then render_button(element_attributes)
+            else render_element(element_attributes)
+            end
+          end.join
+        end
       end
 
       private
 
-      def render_element(element)
-        return element.to_html if element.is_a?(HexletCode::Elements::Button)
-
-        wrap_with_label(element)
+      def render_element(attributes)
+        element_template = [render_label(attributes), render_input(attributes)]
+        element_template.reverse! if attributes[:type] == :boolean
+        element_template.join
       end
 
-      def wrap_with_label(element)
-        input = element.to_html
-        label_value = element.attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
-        label = Tag.build('label', for: element.attributes[:name]) { label_value }
-        element.is_a?(HexletCode::Elements::BooleanInput) ? [input, label] : [label, input]
+      def render_label(attributes)
+        label_value = attributes[:name].to_s.split('_').map(&:capitalize).join(' ')
+        Tag.build('label', indent_level: 1, for: attributes[:name]) { label_value }
+      end
+
+      def render_input(attributes)
+        type = "#{attributes[:type].to_s.capitalize}Input"
+        HexletCode::Elements.const_get(type).new(attributes).to_html(1)
+      end
+
+      def render_button(attributes)
+        HexletCode::Elements::Button.new(attributes).to_html(1)
       end
     end
   end

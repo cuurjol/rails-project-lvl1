@@ -7,11 +7,10 @@ module HexletCode
   autoload(:Tag, 'hexlet_code/tag.rb')
   autoload(:VERSION, 'hexlet_code/version.rb')
 
-  def self.form_for(model, method: 'post', url: '#')
-    form_attributes = { action: url, method: method }
-    form_builder = FormBuilder.new(model)
-    yield(form_builder) if block_given?
+  def self.form_for(model, form_attributes = {}, &block)
+    form_builder = FormBuilder.new(model, form_attributes)
+    block.call(form_builder) if block_given?
 
-    FormTemplate.render(form_builder, form_attributes)
+    FormTemplate.render(form_builder)
   end
 end
