@@ -5,8 +5,8 @@ module HexletCode
     class PasswordInput < Base
       FILTER_ATTRIBUTES = (%i[type value size maxlength] + BASE_ATTRIBUTES).freeze
 
-      def to_html
-        Tag.build('input', **attributes)
+      def to_html(indent_level = 0)
+        Tag.build('input', indent_level: indent_level, **attributes)
       end
 
       private
